@@ -2,7 +2,11 @@
     <p>Name: <input [(ngModel)]="card.name" /></p>
     <p>URL: <input [(ngModel)]="card.url" /></p>
     <p>Username: <input [(ngModel)]="card.username" /></p>
-    <p>Password: <input type="password" [(ngModel)]="card.password" /></p>
+    <p>Password: 
+        <input type="text" 
+                [className]="(reveal ? '' : 'key') + ' togglable'" 
+                [(ngModel)]="card.password" />
+        <button (click)="togglePassword()">{{ reveal ? 'Hide' : 'Reveal' }}</button></p>
     <p>
         <button (click)="save()">Save</button>
         <button (click)="cancel()">Cancel</button>

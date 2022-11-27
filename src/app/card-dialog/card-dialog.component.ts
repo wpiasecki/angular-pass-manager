@@ -10,6 +10,8 @@ import { CardListService } from '../card-list/card-list.service';
 export class CardDialogComponent implements OnInit {
 
   card = <Card>{};
+  reveal = false;
+
   closeDialogAndUpdateList = response => {
     this.dialogRef.close();
     this.cardService.listUpdated.emit(true);
@@ -21,6 +23,7 @@ export class CardDialogComponent implements OnInit {
     private cardService: CardListService) { }
 
   ngOnInit() {
+    this.reveal = false;
     this.card = JSON.parse(JSON.stringify(this.data.card));
   }
 
@@ -30,6 +33,10 @@ export class CardDialogComponent implements OnInit {
       : this.cardService.save(<Card>this.card);
         
     observable.subscribe(this.closeDialogAndUpdateList);
+  }
+
+  togglePassword() {
+    this.reveal = !this.reveal;
   }
 
   cancel() {
