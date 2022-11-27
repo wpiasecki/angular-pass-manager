@@ -1,5 +1,9 @@
-<div class="card">
+<div class="card" (click)="openDialog()">
     <p class="name">{{card.name}}</p>
-    <p>{{card.url}}</p>
-    <p>{{card.username}}</p>
+    <p class="url">
+        <a href="{{card.url}}" target="_blank">
+            {{card.url}}
+        </a>
+    </p>
+    <p class="username">{{card.username}}</p>
 </div>

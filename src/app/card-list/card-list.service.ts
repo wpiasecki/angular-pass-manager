@@ -1,11 +1,13 @@
 import { HttpClient } from "@angular/common/http";
-import { Injectable } from "@angular/core";
+import { EventEmitter, Injectable } from "@angular/core";
 import { Observable } from "rxjs";
 import { DataAccess } from "../service/data-access";
 
 
 @Injectable()
 export class CardListService {
+
+    listUpdated = new EventEmitter();
 
     constructor(
         private data: DataAccess,
@@ -18,14 +20,18 @@ export class CardListService {
     }
 
     save(card: Card) {
-        throw "nyi";
+        return this.http.post(this.data.url, card);
+    }
+    
+    update(card: Card) {
+        return this.http.put(`${this.data.url}/${card.id}`, card);
     }
 
     delete(card: Card) {
-        throw "nyi";
+        return this.http.delete(`${this.data.url}/${card.id}`);
     }
 
-    update(card: Card) {
+    findByName(name: string) {
         throw "nyi";
     }
 

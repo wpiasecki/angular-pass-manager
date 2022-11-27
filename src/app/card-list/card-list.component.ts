@@ -15,8 +15,14 @@ export class CardListComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('card-list-component.ngOnInit');
-    this.cardListService.list().subscribe(cards => this.cards = cards);
+    this.loadCardList();
+    this.cardListService.listUpdated.subscribe(() => this.loadCardList());
+  }
+
+  loadCardList() {
+    this.cardListService
+      .list()
+      .subscribe(cards => this.cards = cards);
   }
 
 }
