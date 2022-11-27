@@ -32,7 +32,7 @@ export class CardListService {
     }
 
     findByName(name: string) {
-        throw "nyi";
+        return this.http.get<Card[]>(this.data.url, { params: { name: name } });
     }
 
 }

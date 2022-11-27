@@ -1,7 +1,7 @@
 <div>
     <span>
-        <input type="text">
-        <button>Search</button>
+        <input type="text" [(ngModel)]="name">
+        <button (click)="findByName()">Search</button>
     </span>
     <span>
         <button (click)="newCard()">New</button>

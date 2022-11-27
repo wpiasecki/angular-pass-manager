@@ -12,6 +12,7 @@ import { CardDialogComponent } from '../card-dialog/card-dialog.component';
 export class CardListComponent implements OnInit {
 
   cards: Array<Card>;
+  name: string;
 
   constructor(
     private cardListService: CardListService,
@@ -26,6 +27,12 @@ export class CardListComponent implements OnInit {
   loadCardList() {
     this.cardListService
       .list()
+      .subscribe(cards => this.cards = cards);
+  }
+
+  findByName() {
+    this.cardListService
+      .findByName(this.name)
       .subscribe(cards => this.cards = cards);
   }
 
