@@ -1,7 +1,15 @@
-<p>card-list works!</p>
+<div>
+    <span>
+        <input type="text">
+        <button>Search</button>
+    </span>
+    <span>
+        <button (click)="newCard()">New</button>
+    </span>
+</div>
 
 <div class="card-container">
     <div *ngFor="let card of cards">
-        <app-card [card]="card"></app-card>
+        <app-card [card]="card" (click)="editCard(card)"></app-card>
     </div>
 </div>
