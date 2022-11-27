@@ -3,4 +3,5 @@ Username: <input [(ngModel)]="card.username" />
 <p>
     <button (click)="save()">Save</button>
     <button (click)="cancel()">Cancel</button>
+    <button (click)="delete()" (show)="!!card.id">Delete</button>
 </p>

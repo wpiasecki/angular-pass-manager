@@ -12,6 +12,10 @@ import { CardListService } from '../card-list/card-list.service';
 export class CardDialogComponent implements OnInit {
 
   card = <Card>{};
+  closeDialogAndUpdateList = response => {
+    this.dialogRef.close();
+    this.cardService.listUpdated.emit(true);
+  };
 
   constructor(
     @Inject(MAT_DIALOG_DATA) private data,
@@ -27,15 +31,17 @@ export class CardDialogComponent implements OnInit {
       this.cardService.update(<Card>this.card) 
       : this.cardService.save(<Card>this.card);
         
-    observable.subscribe(response => {
-      this.dialogRef.close();
-      this.cardService.listUpdated.emit(true);
-    });
-    
+    observable.subscribe(this.closeDialogAndUpdateList);
   }
 
   cancel() {
     this.dialogRef.close();
+  }
+
+  delete() {
+    this.cardService
+      .delete(this.card)
+      .subscribe(this.closeDialogAndUpdateList);
   }
 
 }
