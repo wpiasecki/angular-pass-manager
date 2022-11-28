@@ -1,15 +1,57 @@
 <div>
-    <p>Name: <input [(ngModel)]="card.name" /></p>
-    <p>URL: <input [(ngModel)]="card.url" /></p>
-    <p>Username: <input [(ngModel)]="card.username" /></p>
-    <p>Password: 
-        <input type="text" 
-                [className]="(reveal ? '' : 'key') + ' togglable'" 
-                [(ngModel)]="card.password" />
-        <button (click)="togglePassword()">{{ reveal ? 'Hide' : 'Reveal' }}</button></p>
-    <p>
-        <button (click)="save()">Save</button>
-        <button (click)="cancel()">Cancel</button>
-        <button (click)="delete()" [hidden]="!card.id">Delete</button>
-    </p>
+    <form [formGroup]="form">
+        <p>Name: 
+            <input formControlName="name"
+                    id="name"
+                    [className]="'form-control'" />
+            
+        </p>
+        <div *ngIf="form.controls['name'].invalid && form.controls['name'].touched" class="alert">
+            <div *ngIf="form.controls['name'].errors.required">
+                Name is required.
+            </div>
+        </div>
+        
+        <p>URL: 
+            <input formControlName="url"
+                    id="url"
+                    [className]="form-control" />
+        </p>
+
+        <div *ngIf="form.controls['url'].invalid && form.controls['url'].touched" class="alert">
+            <div *ngIf="form.controls['url'].errors.required">
+                URL is required.
+            </div>
+        </div>
+
+        <p>Username: 
+            <input formControlName="username"
+                    id="username"
+                    [className]="form-control" />
+        </p>
+        <div *ngIf="form.controls['username'].invalid && form.controls['username'].touched" class="alert">
+            <div *ngIf="form.controls['username'].errors.required">
+                Username is required.
+            </div>
+        </div>
+
+        <p>Password: 
+            <input type="text" 
+                    id="password"
+                    formControlName="password"
+                    [className]="(reveal ? '' : 'key') + ' togglable form-control'" />
+            <button (click)="togglePassword()">{{ reveal ? 'Hide' : 'Reveal' }}</button>
+        </p>
+        <div *ngIf="form.controls['password'].invalid && form.controls['password'].touched" class="alert">
+            <div *ngIf="form.controls['password'].errors.required">
+                Password is required.
+            </div>
+        </div>
+
+        <div>
+            <button (click)="save()" [disabled]="!form.valid">Save</button>
+            <button (click)="cancel()">Cancel</button>
+            <button (click)="delete()" [hidden]="!card.id">Delete</button>
+        </div>
+    </form>
 </div>
